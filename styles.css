@@ -1,0 +1,35 @@
+body {
+    background-color: rgb(6, 114, 114);
+}
+
+.the_buttons {
+    background-color: #c0bd03;
+    width: auto;
+    margin: 0px;
+    padding: 0rem 25rem 0rem 25rem;
+    height: auto;
+    gap: 50px;
+}
+
+button {
+    height: 10rem;
+    width: 10rem;
+    justify-content: space-between;
+    margin: 30px;
+}
+
+.green {
+    background-color: green;
+}
+
+.red {
+    background-color: red;
+}
+
+.blue {
+    background-color: blue;
+}
+
+.yellow {
+    background-color: yellow;
+}
