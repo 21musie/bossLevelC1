@@ -1,9 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 body {
     background-color: rgb(6, 114, 114);
+    color: white;
+}
+
+h1 {
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 3rem;
+    font-family: 'Press Start 2P', cursive;
 }
 
 .the_buttons {
-    background-color: #c0bd03;
+    /* background-color: #c0bd03; */
     width: auto;
     margin: 0px;
     padding: 0rem 25rem 0rem 25rem;
@@ -16,6 +27,8 @@ button {
     width: 10rem;
     justify-content: space-between;
     margin: 30px;
+    border: 12px solid black;
+    border-radius: 20%;
 }
 
 .green {
