@@ -12,5 +12,8 @@
         "url": "bossLevelC1"
     },
     "author": "mossad",
-    "license": "ISC"
+    "license": "ISC",
+    "dependencies": {
+        "supervillains": "^4.0.0"
+    }
 }

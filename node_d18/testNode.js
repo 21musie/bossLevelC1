@@ -9,5 +9,10 @@
 
 // console.log(randomSuperhero());
 
-import { randomSuperhero } from 'superheroes';
-console.log(randomSuperhero());
+// import { randomSuperhero } from 'superheroes';
+// console.log(randomSuperhero());
+
+//supervillains
+import supervillains, { randomSupervillain } from 'supervillains';
+
+console.log(randomSupervillain());
