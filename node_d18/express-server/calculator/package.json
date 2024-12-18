@@ -1,0 +1,18 @@
+{
+  "name": "calculator",
+  "version": "1.0.0",
+  "description": "simple calc app",
+  "main": "calculator.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "bossLevelC1"
+  },
+  "author": "mos",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}
