@@ -1,0 +1,15 @@
+{
+  "name": "bmic",
+  "version": "1.0.0",
+  "description": "just a simple bmicalculator",
+  "main": "bmic.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "bossLevelC1"
+  },
+  "author": "muise",
+  "license": "ISC"
+}
