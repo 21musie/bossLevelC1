@@ -4,4 +4,11 @@ Specifies methods and data formats for requests and responses.
 Allows developers to access functionalities without understanding underlying code.
 Facilitates interoperability between systems and services.
 Essential for building modern web applications and integrating complex functionalities.
+<<<<<<< HEAD
 openWaK: 4c06d116afad1db786ea165c4cbe82af
+=======
+
+this is just for the sake of the streak
+same 
+same
+>>>>>>> ddb027358902eb607db957b0512c17fd08dd6a65
