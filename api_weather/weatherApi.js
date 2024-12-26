@@ -14,13 +14,20 @@ app.get("/", (req, res) => {
             const weatherData = JSON.parse(data);
             const temp = weatherData.main.temp;
             const desc = weatherData.weather[0].description;
-            console.log(desc);
-            res.send('<h1>The temprature in your areea is ' + temp + ' celcius</h1>');
+            const icon = weatherData.weather[0].icon;
+
+            console.log(icon);
+
+            res.write('<h1>The temprature in your area is ' + temp + ' celcius</br></h1>');
+            res.write(' <h1> and the weather is : ' + desc + '</h1>');
+            res.write("<img src='http://openweathermap.org/img/wn/" + icon + "@2x.png'>");
+            res.send();
         });
     });
 
-
-    res.send("up and runnig");
+    //apparently we cant have more than one res.send statements --error code:'ERR_HTTP_HEADERS_SENT'
+    //but we can have multiple res,write statements and then finally call res.send
+    // res.send("up and runnig");
 
 })
 
