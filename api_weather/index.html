@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Fetcher</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+        
+        form {
+            margin-bottom: 20px;
+        }
+        
+        input {
+            padding: 10px;
+            margin-right: 10px;
+        }
+        
+        button {
+            padding: 10px;
+        }
+        
+        #weatherInfo {
+            margin-top: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Weather Fetcher</h1>
+    <form id="weatherForm">
+        <input type="text" id="cityInput" placeholder="Enter city" required>
+        <button type="submit">Get Weather</button>
+    </form>
+    <div id="weatherInfo"></div>
+
+    <script>
+        const apiKey = 'YOUR_API_KEY'; // Replace with your OpenWeatherMap API key
+
+        document.getElementById('weatherForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const city = document.getElementById('cityInput').value;
+            const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+
+            fetch(url)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('City not found');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    const temp = data.main.temp;
+                    const desc = data.weather[0].description;
+                    const icon = data.weather[0].icon;
+                    document.getElementById('weatherInfo').innerHTML = `
+                        <h2>The temperature in ${city} is ${temp} °C</h2>
+                        <h3>Weather: ${desc}</h3>
+                        <img src="http://openweathermap.org/img/wn/${icon}@2x.png" alt="Weather icon">
+                    `;
+                })
+                .catch(error => {
+                    document.getElementById('weatherInfo').innerHTML = `<h2>${error.message}</h2>`;
+                });
+        });
+    </script>
+
+</body>
+
+</html>
