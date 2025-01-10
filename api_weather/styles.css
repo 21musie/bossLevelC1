@@ -25,3 +25,7 @@ button {
     margin-top: 20px;
     text-align: center;
 }
+
+.fontColor {
+    color: rgb(17, 17, 177);
+}

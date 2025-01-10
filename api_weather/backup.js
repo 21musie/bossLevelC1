@@ -6,8 +6,14 @@ const { CLIENT_RENEG_WINDOW } = require("tls");
 
 const app = express();
 
+
 app.get("/", (req, res) => {
-    const url = "https://api.openweathermap.org/data/2.5/weather?lat=38.8&lon=8.9&appid=4c06d116afad1db786ea165c4cbe82af&units=metric";
+    let lattitude = 38.8;
+    let longtude = 8.9;
+    let unit = "metric";
+    const apiKey = "4c06d116afad1db786ea165c4cbe82af";
+
+    const url = "https://api.openweathermap.org/data/2.5/weather?lat=" + lattitude + "&lon=" + longtude + "&appid=" + apiKey + "&units=" + unit;
     https.get(url, (response) => {
         console.log(response.statusCode);
         response.on("data", (data) => {

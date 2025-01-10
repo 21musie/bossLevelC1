@@ -11,11 +11,13 @@
 <body>
 
     <h1>Weather Fetcher</h1>
-    <form id="weatherForm">
-        <input type="text" id="cityInput" placeholder="Enter city" required>
+
+    <form action="/weather" method="post">
+        <input type="text" id="cityName" name="cityName" placeholder="Enter City" required>
+        <!-- <input type="text" id="lati" name="lattitude" placeholder="Enter lattitude" required>
+        <input type="text" id="long" name="longtude" placeholder="Enter longtude" required> -->
         <button type="submit">Get Weather</button>
     </form>
-    <div id="weatherInfo"></div>
 
 
     <script src="weatherApi.js"></script>
