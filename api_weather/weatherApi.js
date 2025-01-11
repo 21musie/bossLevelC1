@@ -121,6 +121,6 @@ getCoordinates(cityName)
 
 
 // Start the server
-app.listen(2002, () => {
+app.listen(2000, () => {
     console.log("Server is running on port 2000...");
 });
