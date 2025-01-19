@@ -5,27 +5,84 @@ body {
     align-items: center;
     justify-content: center;
     height: 100vh;
+    margin: 0;
+    /* Remove default body margin */
     background-color: #f4f4f4;
 }
 
 form {
+    background-color: white;
+    /* Added a background color for contrast */
+    border-radius: 8px;
+    /* Rounded corners for a softer look */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    /* Subtle shadow for depth */
+    padding: 20px;
+    /* Added padding for better spacing */
     margin-bottom: 20px;
+    width: 300px;
+    /* Fixed width for forms */
 }
 
 input {
     padding: 10px;
     margin-right: 10px;
+    border: 1px solid #ccc;
+    /* Added border for better input visibility */
+    border-radius: 4px;
+    /* Rounded corners for inputs */
+    width: calc(100% - 24px);
+    /* Full width minus padding and margin */
+    box-sizing: border-box;
+    /* Ensure padding is included in width */
 }
 
 button {
     padding: 10px;
+    border: none;
+    /* Remove default button border */
+    border-radius: 4px;
+    /* Rounded corners for buttons */
+    background-color: rgb(17, 17, 177);
+    /* Primary button color */
+    color: white;
+    /* Text color for buttons */
+    cursor: pointer;
+    /* Pointer cursor on hover */
+    transition: background-color 0.3s;
+    /* Smooth transition for hover effect */
+}
+
+button:hover {
+    background-color: rgb(15, 15, 150);
+    /* Darker shade on hover */
 }
 
 #weatherInfo {
     margin-top: 20px;
     text-align: center;
+    background-color: rgba(255, 255, 255, 0.9);
+    /* Slightly transparent background */
+    border-radius: 8px;
+    /* Rounded corners */
+    padding: 15px;
+    /* Padding for better spacing */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    /* Subtle shadow */
 }
 
 .fontColor {
     color: rgb(17, 17, 177);
+    font-weight: bold;
+    /* Make the font bold for emphasis */
+}
+
+
+/* Media Queries for Responsiveness */
+
+@media (max-width: 400px) {
+    form {
+        width: 90%;
+        /* Full width on smaller screens */
+    }
 }
