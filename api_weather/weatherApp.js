@@ -1,6 +1,7 @@
 const express = require("express");
 const https = require("https");
 const bodyParser = require("body-parser");
+require('dotenv').config(); // Load environment variables
 
 const app = express();
 
@@ -12,31 +13,51 @@ app.get("/", (req, res) => {
     res.sendFile(__dirname + "/index.html");
 });
 
-// Handle POST request to get weather data
-app.post("/weather", (req, res) => {
-    const city = req.body.cityName;
-    const apiKey = "4c06d116afad1db786ea165c4cbe82af";
+// Function to fetch weather data
+async function fetchWeatherData(city) {
+    const apiKey = process.env.API_KEY; // Use environment variable for API key
     const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
 
-    https.get(url, (response) => {
-        console.log(response.statusCode);
-        response.on("data", (data) => {
-            const weatherData = JSON.parse(data);
-            if (weatherData.cod !== 200) {
-                // Handle error case where city is not found
-                res.send(`<h1>Error: ${weatherData.message}</h1>`);
-                return;
-            }
-            const temp = weatherData.main.temp;
-            const desc = weatherData.weather[0].description;
-            const icon = weatherData.weather[0].icon;
+    return new Promise((resolve, reject) => {
+        https.get(url, (response) => {
+            let data = '';
 
-            res.write(`<h1>The temperature in ${city} is <span style="color: blue;">${temp} &deg;C</span></h1>`);
-            res.write(`<h1>and the weather is: ${desc}</h1>`);
-            res.write(`<img src='http://openweathermap.org/img/wn/${icon}@2x.png'>`);
-            res.send();
+            response.on("data", chunk => {
+                data += chunk;
+            });
+
+            response.on("end", () => {
+                const weatherData = JSON.parse(data);
+                if (weatherData.cod !== 200) {
+                    reject(new Error(weatherData.message));
+                } else {
+                    resolve(weatherData);
+                }
+            });
+        }).on("error", (err) => {
+            reject(err);
         });
     });
+}
+
+// Handle POST request to get weather data
+app.post("/weather", async (req, res) => {
+    const city = req.body.cityName;
+
+    try {
+        const weatherData = await fetchWeatherData(city);
+        const temp = weatherData.main.temp;
+        const desc = weatherData.weather[0].description;
+        const icon = weatherData.weather[0].icon;
+
+        res.send(`
+            <h1>The temperature in ${city} is <span style="color: blue;">${temp} &deg;C</span></h1>
+            <h1>and the weather is: ${desc}</h1>
+            <img src='http://openweathermap.org/img/wn/${icon}@2x.png'>
+        `);
+    } catch (error) {
+        res.send(`<h1>Error: ${error.message}</h1>`);
+    }
 });
 
 // Function to get city name from coordinates
@@ -45,10 +66,7 @@ async function getCityName(latitude, longitude) {
     const response = await fetch(url);
     const data = await response.json();
 
-    if (data && data.address) {
-        return data.address.city || data.address.town || data.address.village || null;
-    }
-    return null;
+    return data?.address?.city || data?.address?.town || data?.address?.village || null;
 }
 
 // Example usage of getCityName
@@ -65,11 +83,7 @@ async function getCoordinates(cityName) {
     const response = await fetch(url);
     const data = await response.json();
 
-    if (data.length > 0) {
-        const location = data[0];
-        return { latitude: location.lat, longitude: location.lon };
-    }
-    return null;
+    return data.length > 0 ? { latitude: data[0].lat, longitude: data[0].lon } : null;
 }
 
 // Example usage of getCoordinates
